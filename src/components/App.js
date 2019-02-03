@@ -20,8 +20,13 @@ class App extends Component {
     courses[`cou${Date.now()}`] = course;
     this.setState({ courses });
   };
-  loadSampleCourses = () => {
+  loadCoursesSampleJSON = () => {
     this.setState({ courses: sampleCourses });
+  };
+  loadCoursesSampleAPI = () => {
+    fetch(`https://localhost:5001/api/courses`)  // NetCoreChallenge
+    .then(response => response.json())
+    .then(data => this.setState({ courses: data }));
   };
   render() {
     return (
@@ -36,7 +41,8 @@ class App extends Component {
         </div>
         <Inventory
           addCourse={this.addCourse}
-          loadSampleCourses={this.loadSampleCourses}
+          loadCoursesSampleJSON={this.loadCoursesSampleJSON}
+          loadCoursesSampleAPI={this.loadCoursesSampleAPI}
         />
       </div>
     );
